@@ -11,9 +11,14 @@
 </template>
 
 <script>
-    export default {
-        name: ""
+  export default {
+    name: "TodoFooter",
+    props: {
+      todos: Array,
+      deleteAll:Function,
+      selectAll:Function
     }
+  }
 </script>
 
 <style scoped>

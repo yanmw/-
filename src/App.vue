@@ -2,8 +2,8 @@
   <div class="todo-container">
     <div class="todo-wrap">
       <TodoHearder :addTodo="addTodo"/>
-      <TodoList :todos="todos"/>
-      <TodoFooter/>
+      <TodoList :todos="todos" :delTodo="delTodo"/>
+      <TodoFooter :todos="todos" :deleteAll="deleteAll" :selectAll="selectAll"/>
     </div>
   </div>
 </template>
@@ -26,10 +26,13 @@
         ]
       }
     },
-    methods:{
-     addTodo(todo){
-       this.todos.unshift(todo)
-     }
+    methods: {
+      addTodo(todo) {
+        this.todos.unshift(todo)
+      },
+      delTodo(index) {
+        this.todos.splice(index,1)
+      }
     }
   }
 </script>

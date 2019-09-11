@@ -1,6 +1,6 @@
 <template>
   <ul class="todo-main">
-  <TodoItem v-for="(todo,index) in todos" :key="index" :todo="todo" :index="index"/>
+  <TodoItem v-for="(todo,index) in todos" :key="index" :todo="todo" :index="index" :delTodo="delTodo"/>
   </ul>
 </template>
 
@@ -13,7 +13,8 @@
       todos: {
         type: Array,
         required: true
-      }
+      },
+      delTodo:Function
     },
     components:{
       TodoItem
