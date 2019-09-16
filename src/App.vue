@@ -3,7 +3,7 @@
     <div class="todo-wrap">
       <TodoHearder :addTodo="addTodo"/>
       <TodoList :todos="todos" :delTodo="delTodo"/>
-      <TodoFooter :todos="todos" :deleteAll="deleteAll" :selectAll="selectAll"/>
+      <TodoFooter :todos="todos" :deleteCheck="deleteCheck" :selectAll="selectAll"/>
     </div>
   </div>
 </template>
@@ -31,7 +31,13 @@
         this.todos.unshift(todo)
       },
       delTodo(index) {
-        this.todos.splice(index,1)
+        this.todos.splice(index, 1)
+      },
+      deleteCheck() {
+        this.todos = this.todos.filter(todo => !todo.complete)
+      },
+      selectAll(isCheck) {
+        this.todos.forEach(todo => todo.complete = isCheck)
       }
     }
   }
