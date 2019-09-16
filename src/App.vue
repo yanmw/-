@@ -20,10 +20,7 @@
     },
     data() {
       return {
-        todos: [
-          {title: 'eating', complete: false},
-          {title: 'sleeping', complete: false}
-        ]
+        todos: JSON.parse(window.localStorage.getItem('todos_key') || '[]')
       }
     },
     methods: {
@@ -38,6 +35,14 @@
       },
       selectAll(isCheck) {
         this.todos.forEach(todo => todo.complete = isCheck)
+      }
+    },
+    watch:{
+      todos:{
+        deep:true,
+        handler:function (value) {
+          window.localStorage.setItem('todos_key',JSON.stringify(value))
+        }
       }
     }
   }
