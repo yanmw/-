@@ -14,6 +14,7 @@
 </template>
 
 <script>
+  import storageUtil from './util/storageUtil'
   import PubSub from 'pubsub-js'
   import TodoFooter from './components/TodoFooter'
   import TodoHearder from './components/TodoHeader'
@@ -26,7 +27,7 @@
     },
     data() {
       return {
-        todos: JSON.parse(window.localStorage.getItem('todos_key') || '[]')
+        todos: storageUtil.readTodos()
       }
     },
     computed: {
@@ -77,7 +78,7 @@
       todos:{
         deep:true,
         handler:function (value) {
-          window.localStorage.setItem('todos_key',JSON.stringify(value))
+          storageUtil.saveTodos(value)
         }
       }
     }
