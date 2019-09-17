@@ -7,7 +7,7 @@
 <script>
   export default {
     props: {
-      addTodo: Function
+      // addTodo: Function
     },
     name: "TodoHeader",
     data() {
@@ -23,7 +23,7 @@
           return
         }
         const todo = {title, complete: false};
-        this.addTodo(todo);
+        this.$emit('addTodo',todo)
         this.title = ''
       }
     }

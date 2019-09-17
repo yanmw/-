@@ -5,10 +5,12 @@
       <span>{{todo.title}}</span>
     </label>
     <button class="btn btn-danger" v-show="isShow" @click="delItem">删除</button>
+    <button class="btn btn-danger" v-show="isShow" @click="updateTodo">更新</button>
   </li>
 </template>
 
 <script>
+  import PubSub from 'pubsub-js'
   export default {
     name: "TodoItem",
     props: {
@@ -37,6 +39,9 @@
         if (window.confirm(`确定删除${todo.title}嘛？`)) {
           this.delTodo(index)
         }
+      },
+      updateTodo(){
+        PubSub.publish('updateTodo',this.index)
       }
     }
   }

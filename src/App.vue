@@ -1,7 +1,7 @@
 <template>
   <div class="todo-container">
     <div class="todo-wrap">
-      <TodoHearder :addTodo="addTodo"/>
+      <TodoHearder @addTodo="addTodo"/><!--自定义事件，此种传递只适用于父子组件，超过两级无法使用。-->
       <TodoList :todos="todos" :delTodo="delTodo"/>
       <TodoFooter :todos="todos" :deleteCheck="deleteCheck" :selectAll="selectAll"/>
     </div>
@@ -9,6 +9,7 @@
 </template>
 
 <script>
+  import PubSub from 'pubsub-js'
   import TodoFooter from './components/TodoFooter'
   import TodoHearder from './components/TodoHeader'
   import TodoList from './components/TodoList'
@@ -23,6 +24,11 @@
         todos: JSON.parse(window.localStorage.getItem('todos_key') || '[]')
       }
     },
+    mounted(){  //消息的订阅和发布，比组件之间传递方法方便
+      PubSub.subscribe('updateTodo',(msg,index)=>{
+        this.updateTodo(index)
+      })
+    },
     methods: {
       addTodo(todo) {
         this.todos.unshift(todo)
@@ -35,6 +41,10 @@
       },
       selectAll(isCheck) {
         this.todos.forEach(todo => todo.complete = isCheck)
+      },
+      updateTodo(index){
+        const todo = {title:"aaa",complete:false}
+        this.todos.splice(index,1,todo)
       }
     },
     watch:{
