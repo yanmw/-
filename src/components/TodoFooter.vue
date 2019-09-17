@@ -1,24 +1,27 @@
 <template>
   <div class="todo-footer">
     <label>
-      <input type="checkbox" v-model="isAllCheck"/>
+      <!--<input type="checkbox" v-model="isAllCheck"/>-->
+      <slot name="checkAll"></slot>
     </label>
     <span>
-          <span>已完成{{completeSize}}</span> / 全部{{todos.length}}
-        </span>
-    <button class="btn btn-danger" v-show="completeSize>0" @click="deleteCheck()">清除已完成任务</button>
+         <!-- <span>已完成{{completeSize}} / 全部{{todos.length}}</span>-->
+      <slot name="count"></slot>
+    </span>
+    <!--<button class="btn btn-danger" v-show="completeSize>0" @click="deleteCheck()">清除已完成任务</button>-->
+    <slot name="delete"></slot>
   </div>
 </template>
 
 <script>
   export default {
     name: "TodoFooter",
-    props: {
+    /*props: {
       todos: Array,
       deleteCheck: Function,
       selectAll: Function
-    },
-    computed: {
+    },*/
+/*    computed: {
       completeSize() {
         //array.reduce(function(total, currentValue, currentIndex, arr), initialValue).
         //function(total,currentValue, index,arr)	必需。用于执行每个数组元素的函数。
@@ -38,7 +41,7 @@
           this.selectAll(value)
         }
       }
-    }
+    }*/
   }
 </script>
 
